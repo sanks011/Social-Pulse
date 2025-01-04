@@ -252,7 +252,7 @@ const AnalyzerForm = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-gray-400"
             >
-              Enter content type: reel, carousel, static image, or live stream
+              Enter content type: Reels, Carousel, Static Image, or Live Stream
             </motion.p>
           </div>
 
