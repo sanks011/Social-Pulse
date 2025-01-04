@@ -135,19 +135,23 @@ const AnalyzerForm = () => {
     }
     setError("");
     setLoading(true);
-
+  
     try {
-      // Make the backend API call
-      console.log("Making API call to:", `${API_URL}/analyze`); // Debug log
       const response = await fetch(`${API_URL}/analyze`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ text: postType }),
+        body: JSON.stringify({ text: text }),
       });
+  
+      if (!response.ok) {
+        const errorData = await response.text();
+        throw new Error(`HTTP error! status: ${response.status}, message: ${errorData}`);
+      }
+  
       const data = await response.json();
-
+  
       // Get visualization data from CSV
       const visualizationData = processCSVData(text);
       
@@ -156,7 +160,7 @@ const AnalyzerForm = () => {
         setResult(null);
         return;
       }
-
+  
       // Combine API response with CSV visualization data
       setResult({
         message: data.outputs[0].outputs[0].results.message.text,
@@ -164,12 +168,12 @@ const AnalyzerForm = () => {
         trends: visualizationData.trends
       });
     } catch (error) {
-      setError("An error occurred. Please try again.");
+      console.error("Analysis error:", error);
+      setError(`Analysis failed: ${error.message}`);
     } finally {
       setLoading(false);
     }
   };
-
   const COLORS = ['#8b5cf6', '#6366f1', '#3b82f6'];
 
   return (
