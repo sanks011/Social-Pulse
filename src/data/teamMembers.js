@@ -13,7 +13,7 @@ export const teamMembers = [
   {
     name: "Shovon Halder",
     role: "Fullstack Developer",
-    image: "/src/assets/shovon.jpg",
+    image: "/shovon.jpg",
     bio: "AI/ML expert specializing in social media trends",
     social: {
       github: "https://github.com/sarah",
