@@ -46,7 +46,7 @@ const Header = () => {
                     <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full opacity-0 group-hover:opacity-50 blur-md transition-all duration-500" />
                     <div className="relative w-12 h-12 rounded-full overflow-hidden border border-white/20">
                       <img
-                        src="/src/assets/crazy.gif"
+                        src="/crazy.gif"
                         alt="Logo"
                         className="w-full h-full object-cover"
                       />
