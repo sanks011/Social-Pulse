@@ -2,7 +2,7 @@ export const teamMembers = [
   {
     name: "Sankalpa Sarkar",
     role: "Fullstack Developer",
-    image: "/src/assets/sankalpa.jpg",
+    image: "/sankalpa.jpg",
     bio: "Full-stack wizard with a passion for building web apps",
     social: {
       github: "https://github.com/sanks011",
@@ -24,7 +24,7 @@ export const teamMembers = [
   {
     name: "Sahnik Biswas",
     role: "Fullstack Developer",
-    image: "/src/assets/sahnik.jpg",
+    image: "/sahnik.jpg",
     bio: "Building the future of web applications",
     social: {
       github: "https://github.com/mike",
@@ -35,7 +35,7 @@ export const teamMembers = [
   {
     name: "Shreyas Saha",
     role: "UI/UX Designer",
-    image: "/src/assets/shreyas.jpg",
+    image: "/shreyas.jpg",
     bio: "Creating beautiful and intuitive user experiences",
     social: {
       github: "https://github.com/emma",
