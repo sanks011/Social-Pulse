@@ -100,10 +100,57 @@ const AnalyzerForm = () => {
 
   const API_URL = process.env.REACT_APP_API_URL || 'https://socialpulse-backend-jz7n.onrender.com';
 
+    // Enhanced function to normalize post types
+    const normalizePostType = (postType) => {
+      const input = postType.toLowerCase().trim();
+      
+      // Handle different variations of post types with more patterns
+      if (input.includes('reel') || 
+          input.includes('Reel') || 
+          input.includes('REEL') ||
+          input === 'reels' || 
+          input === 'Reels' || 
+          input === 'REELS') {
+        return 'reel';
+      }
+      
+      if (input.includes('carousel') || 
+          input.includes('Carousel') || 
+          input.includes('CAROUSEL') ||
+          input === 'carousels' || 
+          input === 'Carousels' || 
+          input === 'CAROUSELS') {
+        return 'carousel';
+      }
+      
+      if (input.includes('static') || 
+          input.includes('Static') || 
+          input.includes('STATIC') ||
+          input.includes('image') || 
+          input.includes('Image') || 
+          input.includes('IMAGE')) {
+        return 'static_image';
+      }
+      
+      if (input.includes('live') || 
+          input.includes('Live') || 
+          input.includes('LIVE') ||
+          input.includes('stream') || 
+          input.includes('Stream') || 
+          input.includes('STREAM')) {
+        return 'live_stream';
+      }
+      
+      return input; // Return original input if no match found
+    };
+
+
   // Process CSV data for visualizations based on selected post type
   const processCSVData = (postType) => {
+    const normalizedType = normalizePostType(postType);
+    
     const filteredData = csvData.filter(
-      item => item.post_type.toLowerCase() === postType.toLowerCase()
+      item => item.post_type.toLowerCase() === normalizedType
     );
 
     if (filteredData.length === 0) return null;
@@ -137,14 +184,13 @@ const AnalyzerForm = () => {
     setLoading(true);
   
     try {
-      // Add credentials and mode to fetch options
       const response = await fetch(`${API_URL}/analyze`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ text: text }),
-        mode: 'cors', // Explicitly set CORS mode
+        mode: 'cors',
       });
   
       if (!response.ok) {
@@ -159,7 +205,7 @@ const AnalyzerForm = () => {
       const visualizationData = processCSVData(text);
       
       if (!visualizationData) {
-        setError("Invalid post type. Try 'reel', 'carousel', 'static_image', or 'live_stream'");
+        setError("Invalid post type. Try 'reel', 'carousel', 'static image', or 'live stream'");
         setResult(null);
         return;
       }
@@ -177,6 +223,7 @@ const AnalyzerForm = () => {
       setLoading(false);
     }
   };
+  
   const COLORS = ['#8b5cf6', '#6366f1', '#3b82f6'];
 
   return (
@@ -205,7 +252,7 @@ const AnalyzerForm = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-gray-400"
             >
-              Enter content type: reel, carousel, static_image, or live_stream
+              Enter content type: reel, carousel, static image, or live stream
             </motion.p>
           </div>
 
