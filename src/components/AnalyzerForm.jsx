@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Loader2 } from "lucide-react";
@@ -97,6 +98,8 @@ const AnalyzerForm = () => {
   const [error, setError] = useState("");
   const [result, setResult] = useState(null);
 
+  const API_URL = process.env.REACT_APP_API_URL || 'https://socialpulse-backend-jz7n.onrender.com';
+
   // Process CSV data for visualizations based on selected post type
   const processCSVData = (postType) => {
     const filteredData = csvData.filter(
@@ -135,12 +138,13 @@ const AnalyzerForm = () => {
 
     try {
       // Make the backend API call
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/analyze`, {
+      console.log("Making API call to:", `${API_URL}/analyze`); // Debug log
+      const response = await fetch(`${API_URL}/analyze`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ text }),
+        body: JSON.stringify({ text: postType }),
       });
       const data = await response.json();
 
