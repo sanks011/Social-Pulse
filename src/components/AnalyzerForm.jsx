@@ -137,21 +137,24 @@ const AnalyzerForm = () => {
     setLoading(true);
   
     try {
+      // Add credentials and mode to fetch options
       const response = await fetch(`${API_URL}/analyze`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ text: text }),
+        mode: 'cors', // Explicitly set CORS mode
       });
   
       if (!response.ok) {
-        const errorData = await response.text();
-        throw new Error(`HTTP error! status: ${response.status}, message: ${errorData}`);
+        const errorText = await response.text();
+        console.error('Error response:', errorText);
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
   
       const data = await response.json();
-  
+      
       // Get visualization data from CSV
       const visualizationData = processCSVData(text);
       
@@ -169,7 +172,7 @@ const AnalyzerForm = () => {
       });
     } catch (error) {
       console.error("Analysis error:", error);
-      setError(`Analysis failed: ${error.message}`);
+      setError(`Analysis failed: ${error.message}. Please try again.`);
     } finally {
       setLoading(false);
     }
