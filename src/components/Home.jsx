@@ -78,7 +78,7 @@ const Home = () => {
               <motion.a
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                href="https://youtu.be/bJ1DC0qwtiQ?si=YgSCfOhQcpAXyz-W"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 text-white py-3 px-8 rounded-lg text-lg font-medium shadow-lg hover:bg-gray-800/70"
